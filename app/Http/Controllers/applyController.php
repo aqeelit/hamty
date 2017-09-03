@@ -37,7 +37,7 @@ class applyController extends Controller
              $profile_id = $value->id ;
              }
 
-        if (!empty($profile)){
+        if (is_null($profile)){
 
             $app = apply::where('job_id', $jobId)
             ->where('profile_id', $profile_id)
@@ -67,7 +67,8 @@ class applyController extends Controller
             
         }else{
 
-            return view('profile.note');
+            $msg = "You have to edit your profile first." ;
+            return response()->json(array('msg'=> $msg), 200);
 
         }
     }
